@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VCT Champions 2026 Shanghai - Club Members | ICT 10 Drill #2</title>
+    
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    # ==== hello john pyscript
+    <link rel="stylesheet" href="https://pyscript.net/releases/2025.11.2/core.css">
+    <script type="module" src="https://pyscript.net/releases/2025.11.2/core.js"></script>
+    
+    <style>
+                body {
+            background-image: url(https://cdn.sanity.io/images/ki5mwjf3/production/3e681f0e3b15d280c79d4e5801b59370626b861c-1920x1070.png);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-color: #0F1923; /* Fallback dark */
+            color: #FFFFFF;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+        }
+        
+        .overlay {
+            background: rgba(15, 25, 35, 0.85);
+            min-height: 100vh;
+            padding: 30px 15px;
+        }
+        
+        .champions-card {
+            background: rgba(15, 25, 35, 0.95);
+            border: 2px solid #FF4655;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(255, 70, 85, 0.4);
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .champions-title {
+            color: #FFD700;
+            text-shadow: 2px 2px 4px #FF4655;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        
+        .btn-champions {
+            background-color: #FF4655;
+            border-color: #FF4655;
+            color: white;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .btn-champions:hover {
+            background-color: #FFD700;
+            border-color: #FFD700;
+            color: #0F1923;
+            transform: scale(1.05);
+        }
+        
+        .form-control {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid #FF4655;
+            color: white;
+        }
+        
+        .form-control:focus {
+            background-color: rgba(255, 255, 255, 0.15);
+            border-color: #FFD700;
+            color: white;
+            box-shadow: 0 0 0 0.2rem rgba(255, 215, 0, 0.25);
+        }
+        
+        .form-control::placeholder {
+            color: #aaa;
+        }
+        
+        .members-list {
+            background: rgba(255, 70, 85, 0.15);
+            border-left: 4px solid #FFD700;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+        
+        .total-count {
+            color: #FFD700;
+            font-size: 1.4em;
+            font-weight: bold;
+        }
+        
+        .header-logo {
+            font-size: 1.2em;
+            color: #FF4655;
+        }
+    </style>
+</head>
+<body>
+    <div class="overlay">
+        <div class="container">
+            <!-- vct '26 theme' -->
+            <div class="text-center mb-4">
+                <h1 class="champions-title display-4">VCT CHAMPIONS 2026</h1>
+                <h2 class="text-white">SHANGHAI CLUB MEMBERS</h2>
+                <p class="header-logo">ICT 10 Drill #2: Set Operators | Professional High School</p>
+                <p class="text-warning">Theme: Champions 2026 - LOUD Champions! erde MVP</p>
+            </div>
+            
+            <!-- Input Section -->
+            <div class="champions-card">
+                <h3 class="text-danger mb-3">Add New Club Member</h3>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <input type="text" id="firstName" class="form-control" placeholder="First Name (e.g. Lucca)">
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" id="lastName" class="form-control" placeholder="Last Name (e.g. Travaioli)">
+                    </div>
+                    <div class="col-12 text-center">
+                        <button class="btn btn-champions btn-lg px-5" py-click="add_member">
+                            ADD TO CLUB
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- output sectionsz -->
+            <div class="champions-card">
+                <div id="output" class="members-list">
+                    <p class="text-center text-muted">Add a member to see the full club list!</p>
+                </div>
+            </div>
+            
+            <!-- feet note -->
+            <div class="text-center mt-4 text-light">
+                <small>Predefined top VCT players included. Using only set operators. No loops or if statements.</small>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Python Code with PyScript -->
+    <script type="py">
+        # Import needed modules for DOM access
+        from pyscript import document
+        
+       # ==== funny list of plauyers
+        
+        # Grade 7 - Americas / LOUD stars
+        grade_7 = {"lukxo", "erde", "tkzin", "Cryocells"}
+        
+        # Grade 8 - EMEA stars
+        grade_8 = {"Derke", "Chronicle", "Jamppi", "keiko"}
+        
+        # Grade 9 - Pacific stars
+        grade_9 = {"something", "Jinggg", "f0rsakeN", "BuZz"}
+        
+        # Grade 10 - Flex / Top overall
+        grade_10 = {"Neon", "marteen", "trent", "leaf", "Asuna"}
+        
+        # Set for newly added members (starts empty)
+        new_members = set()
+        
+        # Function triggered by the button (PyScript event)
+        def add_member(event):
+            # Get input values from the text boxes
+            first = document.getElementById("firstName").value.strip()
+            last = document.getElementById("lastName").value.strip()
+            
+            # Combine first and last name into full name
+            full_name = f"{first} {last}".strip()
+            
+            # Add the new member to the new_members set
+            # Sets automatically ignore duplicates
+            new_members.add(full_name)
+            
+            # Use set operators (union |) to combine all sets into one master set
+            master_set = grade_7 | grade_8 | grade_9 | grade_10 | new_members
+            
+            # Create the HTML output using f-string
+            # Join the sorted members with line breaks (no for loop needed)
+            members_html = "<br>".join(sorted(master_set))
+            total = len(master_set)
+            
+            # Build the display HTML
+            output_html = f"""
+            <h4 class="text-warning">All Members:</h4>
+            <div>{members_html}</div>
+            <p class="total-count mt-3">Total members: {total}</p>
+            """
+            
+            # Update the results using innerHTML
+            document.getElementById("output").innerHTML = output_html
+            
+            # Quality of life: clear the input boxes after adding
+            document.getElementById("firstName").value = ""
+            document.getElementById("lastName").value = ""
+            document.getElementById("firstName").focus()
+    </script>
+</body>
+</html>
